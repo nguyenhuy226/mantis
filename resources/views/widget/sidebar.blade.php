@@ -2,8 +2,10 @@
 <nav class="pc-sidebar">
     <div class="navbar-wrapper">
         <div class="m-header">
-            <a href="../dashboard/index.html" class="b-brand text-primary">
+            <a href="{{ route('home') }}" class="b-brand text-primary">
                 <!-- ========   Change your logo from here   ============ -->
+                <img src="{{ asset('/images/logo-dark.svg') }}" class="img-fluid logo-lg" alt="logo"
+                    style="display: none">
                 <img src="{{ asset('/images/logo-dark.svg') }}" class="img-fluid logo-lg" alt="logo">
             </a>
         </div>

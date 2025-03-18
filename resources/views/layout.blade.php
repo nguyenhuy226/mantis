@@ -12,7 +12,7 @@
 <body data-pc-preset="preset-1" data-pc-direction="ltr" data-pc-theme="light">
     @include('widget.layout-vertical')
     <!-- [ Main Content ] start -->
-    <div class="pc-container">
+    {{-- <div class="pc-container">
         <div class="pc-content">
             <!-- [ breadcrumb ] start -->
             <div class="page-header">
@@ -326,7 +326,8 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
+    @yield('content')
     <!-- [ Main Content ] end -->
     @include('widget.footer-block')
 
