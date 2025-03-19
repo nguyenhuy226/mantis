@@ -22,7 +22,7 @@ class AuthController extends Controller
 
     public function login()
     {
-        return view('page.login');
+        return view('page.auth.login');
     }
 
     public function loginpost(LoginRequest $request)
@@ -45,7 +45,7 @@ class AuthController extends Controller
 
     public function register()
     {
-        return view('page.register');
+        return view('page.auth.register');
     }
 
     public function registerpost(RegisterRequest $request)
@@ -58,7 +58,7 @@ class AuthController extends Controller
 
     public function resetPassword()
     {
-        return view('page.resetPassword');
+        return view('page.auth.resetPassword');
     }
 
     public function logout()
