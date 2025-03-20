@@ -9,11 +9,30 @@ class ProductService
     /**
      * create Product
      *
-     * @return Product
+     * @return string
      */
-    public function createProduct(array $data): Product
+    public function createProduct($request): string
     {
-        return Product::createProduct($data);
+        $data = $request->validated();
+        $data['product_code'] = time();
+        $data['keyword'] = $data['name'];
+        $data['slug'] = $data['name'];
+        $data['sku'] = $data['name'];
+        $data['image'] = $data['name'];
+
+        // check if there is an image file
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('images/application'), $imageName);
+
+            // Save file name to authenticated data
+            $data['image'] = $imageName; // Update file name to data array
+            Product::createProduct($data);
+            return 'Sản phẩm đã được tạo thành công.';
+
+        } else {
+            return 'không load được file ảnh';
+        }
     }
 
     //     /**

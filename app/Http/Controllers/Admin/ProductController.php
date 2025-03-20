@@ -10,10 +10,12 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+
     public function __construct(
         private ProductService  $productService,
         private CategoryService $categoryService,
     ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -36,31 +38,10 @@ class ProductController extends Controller
      */
     public function store(CreateProductRequest $request)
     {
-        $data = $request->validated();
-        $data['product_code'] = time();
-        $data['keyword'] = $data['name'];
-        $data['slug'] = $data['name'];
-        $data['sku'] = $data['name'];
-        $data['image'] = $data['name'];
 
-        // dd($data);
-        // $this->productService->createProduct($data);
+        $meseage = $this->productService->createProduct($request);
 
-        // Kiểm tra xem có file ảnh không
-        if ($request->hasFile('image')) {
-            $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('images/application'), $imageName);
-
-            // Lưu tên file vào dữ liệu đã xác thực
-            $data['image'] = $imageName; // Cập nhật tên file vào mảng dữ liệu
-            $this->productService->createProduct($data);
-            return redirect()->route('products.index')->with('success', 'Sản phẩm đã được tạo thành công.');
-
-        } else {
-            return redirect()->back()->with('error', 'không load được file ảnh');
-        }
-
-        return redirect()->route('products.index')->with('success', 'Sản phẩm đã được tạo thành công.');
+        return redirect()->route('products.index')->with('status', $meseage);
     }
 
     /**
