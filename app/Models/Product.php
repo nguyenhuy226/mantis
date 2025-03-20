@@ -8,7 +8,25 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Product extends Model
 {
     use SoftDeletes;
-
+    protected $table = "products";
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
+     */
+    protected $fillable = [
+        'name',
+        'product_code',
+        'category_id',
+        'keyword',
+        'quantity',
+        'description',
+        'image',
+        'status',
+        'price',
+        'slug',
+        'sku'
+    ];
 
     public function category()
     {
@@ -18,5 +36,10 @@ class Product extends Model
     public function orderDetails()
     {
         return $this->hasMany(OrderDetail::class);
+    }
+
+    public static function createProduct(array $data)
+    {
+        return self::create($data);
     }
 }
