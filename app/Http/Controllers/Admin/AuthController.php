@@ -66,4 +66,24 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()->route('login');
     }
+
+    public function showProfileAccount()
+    {
+        return view('page.auth.accountProfile');
+    }
+
+    public function forgotPassword()
+    {
+        return view('page.auth.forgotPassword');
+    }
+
+    public function checkMail()
+    {
+        return view('page.auth.checkMail');
+    }
+
+    public function codeVerification()
+    {
+        return view('page.auth.codeVerification');
+    }
 }

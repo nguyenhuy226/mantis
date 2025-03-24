@@ -4,6 +4,7 @@
 
 <head>
     @include('widget.head-page-meta')
+    @stack('styleForm')
     @include('widget.head-css')
 </head>
 <!-- [Head] end -->
@@ -14,7 +15,7 @@
     <!-- [ Main Content ] start -->
     @yield('content')
     <!-- [ Main Content ] end -->
-    @include('widget.footer-block') 
+    @include('widget.footer-block')
 
     <!-- [Page Specific JS] start -->
     <script src="{{ asset('/js/plugins/apexcharts.min.js') }}"></script>
@@ -216,6 +217,8 @@
         </div>
     </div>
 </div>
+@stack('scripts')
+@stack('form')
 </body>
 <!-- [Body] end -->
 
