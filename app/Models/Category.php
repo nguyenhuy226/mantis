@@ -10,12 +10,22 @@ class Category extends Model
     use SoftDeletes;
     protected $table = "categories";
 
+    /**
+     * Get the products that owns the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\Hasmany
+     */
     public function products()
     {
         return $this->hasMany(Product::class);
     }
 
-    public static function getListCategory()
+    /**
+     * Get categories list .
+     * @param string 
+     * @return Categories
+     */
+    public static function getListCategory($status)
     {
         return self::all();
     }

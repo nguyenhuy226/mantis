@@ -8,7 +8,7 @@ class ProductService
 {
     /**
      * create Product
-     *
+     * @param CreatProductRequest $request
      * @return string
      */
     public function createProduct($request): string
@@ -42,7 +42,7 @@ class ProductService
      */
     public function getProductList()
     {
-        return Product::getProductlist();
+        return Product::getProductlist(1);
     }
 
     //     /**

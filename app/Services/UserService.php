@@ -8,7 +8,7 @@ class UserService
 {
     /**
      * create user
-     *
+     *@param CreateUserRequest $request
      * @return string
      */
     public function createUser($request)
