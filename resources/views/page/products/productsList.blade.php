@@ -30,441 +30,56 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox">
-                                                </div>
-                                            </td>
-                                            <td class="text-end">7</td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-auto pe-0">
-                                                        <img src="../assets/images/application/prod-img-1.png"
-                                                            alt="user-image" class="wid-40 rounded-circle">
+                                        @foreach ($productList as $product)
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox">
                                                     </div>
-                                                    <div class="col">
-                                                        <h6 class="mb-1">Apple Series 4 GPS A38 MM Space</h6>
-                                                        <p class="text-muted f-12 mb-0">Apple Watch SE Smartwatch </p>
+                                                </td>
+                                                <td class="text-end">7</td>
+                                                <td>
+                                                    <div class="row">
+                                                        <div class="col-auto pe-0">
+                                                            <img src="{{ asset('/images/application/' . $product->image) }}"
+                                                                alt="user-image" class="wid-40 rounded-circle">
+                                                        </div>
+                                                        <div class="col">
+                                                            <h6 class="mb-1">Apple Series 4 GPS A38 MM Space</h6>
+                                                            <p class="text-muted f-12 mb-0">Apple Watch SE Smartwatch </p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td>Electronics, Laptop</td>
-                                            <td class="text-end">$14.59</td>
-                                            <td class="text-end">70</td>
-                                            <td><span class="badge bg-light-success  f-12">In Stock</span> </td>
-                                            <td class="text-center">
-                                                <ul class="list-inline me-auto mb-0">
-                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
-                                                        title="View">
-                                                        <a href="#" class="avtar avtar-xs btn-link-secondary"
-                                                            data-bs-toggle="modal" data-bs-target="#cust-modal">
-                                                            <i class="ti ti-eye f-18"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
-                                                        title="Edit">
-                                                        <a href="../application/ecom_product-add.html"
-                                                            class="avtar avtar-xs btn-link-primary">
-                                                            <i class="ti ti-edit-circle f-18"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
-                                                        title="Delete">
-                                                        <a href="#" class="avtar avtar-xs btn-link-danger">
-                                                            <i class="ti ti-trash f-18"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox">
-                                                </div>
-                                            </td>
-                                            <td class="text-end">2</td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-auto pe-0">
-                                                        <img src="../assets/images/application/prod-img-2.png"
-                                                            alt="user-image" class="wid-40 rounded-circle">
-                                                    </div>
-                                                    <div class="col">
-                                                        <a href="{{ route('products.show', $id = 1) }}">
-                                                            <h6 class="mb-1">Boat On-Ear Wireless</h6>
-                                                        </a>
-                                                        <p class="text-muted f-12 mb-0">Mic(Bluetooth 4.2, Rockerz 450R
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>Electronics, Headphones</td>
-                                            <td class="text-end">$81.99</td>
-                                            <td class="text-end">45</td>
-                                            <td><span class="badge bg-light-danger  f-12">Out of Stock</span> </td>
-                                            <td class="text-center">
-                                                <ul class="list-inline me-auto mb-0">
-                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
-                                                        title="View">
-                                                        <a href="#" class="avtar avtar-xs btn-link-secondary"
-                                                            data-bs-toggle="modal" data-bs-target="#cust-modal">
-                                                            <i class="ti ti-eye f-18"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
-                                                        title="Edit">
-                                                        <a href="../application/ecom_product-add.html"
-                                                            class="avtar avtar-xs btn-link-primary">
-                                                            <i class="ti ti-edit-circle f-18"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
-                                                        title="Delete">
-                                                        <a href="#" class="avtar avtar-xs btn-link-danger">
-                                                            <i class="ti ti-trash f-18"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox">
-                                                </div>
-                                            </td>
-                                            <td class="text-end">5</td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-auto pe-0">
-                                                        <img src="../assets/images/application/prod-img-3.png"
-                                                            alt="user-image" class="wid-40 rounded-circle">
-                                                    </div>
-                                                    <div class="col">
-                                                        <h6 class="mb-1">Fitbit MX30 Smart Watch</h6>
-                                                        <p class="text-muted f-12 mb-0">(MX30- waterproof) watch</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>Fashion, Watch</td>
-                                            <td class="text-end">$49.9</td>
-                                            <td class="text-end">21</td>
-                                            <td><span class="badge bg-light-success  f-12">In Stock</span> </td>
-                                            <td class="text-center">
-                                                <ul class="list-inline me-auto mb-0">
-                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
-                                                        title="View">
-                                                        <a href="#" class="avtar avtar-xs btn-link-secondary"
-                                                            data-bs-toggle="modal" data-bs-target="#cust-modal">
-                                                            <i class="ti ti-eye f-18"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
-                                                        title="Edit">
-                                                        <a href="../application/ecom_product-add.html"
-                                                            class="avtar avtar-xs btn-link-primary">
-                                                            <i class="ti ti-edit-circle f-18"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
-                                                        title="Delete">
-                                                        <a href="#" class="avtar avtar-xs btn-link-danger">
-                                                            <i class="ti ti-trash f-18"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox">
-                                                </div>
-                                            </td>
-                                            <td class="text-end">7</td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-auto pe-0">
-                                                        <img src="../assets/images/application/prod-img-4.png"
-                                                            alt="user-image" class="wid-40 rounded-circle">
-                                                    </div>
-                                                    <div class="col">
-                                                        <h6 class="mb-1">Apple Series 4 GPS A38 MM Space</h6>
-                                                        <p class="text-muted f-12 mb-0">Apple Watch SE Smartwatch </p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>Electronics, Laptop</td>
-                                            <td class="text-end">$14.59</td>
-                                            <td class="text-end">70</td>
-                                            <td><span class="badge bg-light-success  f-12">In Stock</span> </td>
-                                            <td class="text-center">
-                                                <ul class="list-inline me-auto mb-0">
-                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
-                                                        title="View">
-                                                        <a href="#" class="avtar avtar-xs btn-link-secondary"
-                                                            data-bs-toggle="modal" data-bs-target="#cust-modal">
-                                                            <i class="ti ti-eye f-18"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
-                                                        title="Edit">
-                                                        <a href="../application/ecom_product-add.html"
-                                                            class="avtar avtar-xs btn-link-primary">
-                                                            <i class="ti ti-edit-circle f-18"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
-                                                        title="Delete">
-                                                        <a href="#" class="avtar avtar-xs btn-link-danger">
-                                                            <i class="ti ti-trash f-18"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox">
-                                                </div>
-                                            </td>
-                                            <td class="text-end">2</td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-auto pe-0">
-                                                        <img src="../assets/images/application/prod-img-5.png"
-                                                            alt="user-image" class="wid-40 rounded-circle">
-                                                    </div>
-                                                    <div class="col">
-                                                        <h6 class="mb-1">Boat On-Ear Wireless</h6>
-                                                        <p class="text-muted f-12 mb-0">Mic(Bluetooth 4.2, Rockerz 450R</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>Electronics, Headphones</td>
-                                            <td class="text-end">$81.99</td>
-                                            <td class="text-end">45</td>
-                                            <td><span class="badge bg-light-danger  f-12">Out of Stock</span> </td>
-                                            <td class="text-center">
-                                                <ul class="list-inline me-auto mb-0">
-                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
-                                                        title="View">
-                                                        <a href="#" class="avtar avtar-xs btn-link-secondary"
-                                                            data-bs-toggle="modal" data-bs-target="#cust-modal">
-                                                            <i class="ti ti-eye f-18"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
-                                                        title="Edit">
-                                                        <a href="../application/ecom_product-add.html"
-                                                            class="avtar avtar-xs btn-link-primary">
-                                                            <i class="ti ti-edit-circle f-18"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
-                                                        title="Delete">
-                                                        <a href="#" class="avtar avtar-xs btn-link-danger">
-                                                            <i class="ti ti-trash f-18"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox">
-                                                </div>
-                                            </td>
-                                            <td class="text-end">5</td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-auto pe-0">
-                                                        <img src="../assets/images/application/prod-img-6.png"
-                                                            alt="user-image" class="wid-40 rounded-circle">
-                                                    </div>
-                                                    <div class="col">
-                                                        <h6 class="mb-1">Fitbit MX30 Smart Watch</h6>
-                                                        <p class="text-muted f-12 mb-0">(MX30- waterproof) watch</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>Fashion, Watch</td>
-                                            <td class="text-end">$49.9</td>
-                                            <td class="text-end">21</td>
-                                            <td><span class="badge bg-light-success  f-12">In Stock</span> </td>
-                                            <td class="text-center">
-                                                <ul class="list-inline me-auto mb-0">
-                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
-                                                        title="View">
-                                                        <a href="#" class="avtar avtar-xs btn-link-secondary"
-                                                            data-bs-toggle="modal" data-bs-target="#cust-modal">
-                                                            <i class="ti ti-eye f-18"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
-                                                        title="Edit">
-                                                        <a href="../application/ecom_product-add.html"
-                                                            class="avtar avtar-xs btn-link-primary">
-                                                            <i class="ti ti-edit-circle f-18"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
-                                                        title="Delete">
-                                                        <a href="#" class="avtar avtar-xs btn-link-danger">
-                                                            <i class="ti ti-trash f-18"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox">
-                                                </div>
-                                            </td>
-                                            <td class="text-end">7</td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-auto pe-0">
-                                                        <img src="../assets/images/application/prod-img-7.png"
-                                                            alt="user-image" class="wid-40 rounded-circle">
-                                                    </div>
-                                                    <div class="col">
-                                                        <h6 class="mb-1">Apple Series 4 GPS A38 MM Space</h6>
-                                                        <p class="text-muted f-12 mb-0">Apple Watch SE Smartwatch </p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>Electronics, Laptop</td>
-                                            <td class="text-end">$14.59</td>
-                                            <td class="text-end">70</td>
-                                            <td><span class="badge bg-light-success  f-12">In Stock</span> </td>
-                                            <td class="text-center">
-                                                <ul class="list-inline me-auto mb-0">
-                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
-                                                        title="View">
-                                                        <a href="#" class="avtar avtar-xs btn-link-secondary"
-                                                            data-bs-toggle="modal" data-bs-target="#cust-modal">
-                                                            <i class="ti ti-eye f-18"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
-                                                        title="Edit">
-                                                        <a href="../application/ecom_product-add.html"
-                                                            class="avtar avtar-xs btn-link-primary">
-                                                            <i class="ti ti-edit-circle f-18"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
-                                                        title="Delete">
-                                                        <a href="#" class="avtar avtar-xs btn-link-danger">
-                                                            <i class="ti ti-trash f-18"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox">
-                                                </div>
-                                            </td>
-                                            <td class="text-end">2</td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-auto pe-0">
-                                                        <img src="../assets/images/application/prod-img-8.png"
-                                                            alt="user-image" class="wid-40 rounded-circle">
-                                                    </div>
-                                                    <div class="col">
-                                                        <h6 class="mb-1">Boat On-Ear Wireless</h6>
-                                                        <p class="text-muted f-12 mb-0">Mic(Bluetooth 4.2, Rockerz 450R</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>Electronics, Headphones</td>
-                                            <td class="text-end">$81.99</td>
-                                            <td class="text-end">45</td>
-                                            <td><span class="badge bg-light-danger  f-12">Out of Stock</span> </td>
-                                            <td class="text-center">
-                                                <ul class="list-inline me-auto mb-0">
-                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
-                                                        title="View">
-                                                        <a href="#" class="avtar avtar-xs btn-link-secondary"
-                                                            data-bs-toggle="modal" data-bs-target="#cust-modal">
-                                                            <i class="ti ti-eye f-18"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
-                                                        title="Edit">
-                                                        <a href="../application/ecom_product-add.html"
-                                                            class="avtar avtar-xs btn-link-primary">
-                                                            <i class="ti ti-edit-circle f-18"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
-                                                        title="Delete">
-                                                        <a href="#" class="avtar avtar-xs btn-link-danger">
-                                                            <i class="ti ti-trash f-18"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox">
-                                                </div>
-                                            </td>
-                                            <td class="text-end">5</td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-auto pe-0">
-                                                        <img src="../assets/images/application/prod-img-9.png"
-                                                            alt="user-image" class="wid-40 rounded-circle">
-                                                    </div>
-                                                    <div class="col">
-                                                        <h6 class="mb-1">Fitbit MX30 Smart Watch</h6>
-                                                        <p class="text-muted f-12 mb-0">(MX30- waterproof) watch</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>Fashion, Watch</td>
-                                            <td class="text-end">$49.9</td>
-                                            <td class="text-end">21</td>
-                                            <td><span class="badge bg-light-success  f-12">In Stock</span> </td>
-                                            <td class="text-center">
-                                                <ul class="list-inline me-auto mb-0">
-                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
-                                                        title="View">
-                                                        <a href="#" class="avtar avtar-xs btn-link-secondary"
-                                                            data-bs-toggle="modal" data-bs-target="#cust-modal">
-                                                            <i class="ti ti-eye f-18"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
-                                                        title="Edit">
-                                                        <a href="../application/ecom_product-add.html"
-                                                            class="avtar avtar-xs btn-link-primary">
-                                                            <i class="ti ti-edit-circle f-18"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
-                                                        title="Delete">
-                                                        <a href="#" class="avtar avtar-xs btn-link-danger">
-                                                            <i class="ti ti-trash f-18"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                                <td>Electronics, Laptop</td>
+                                                <td class="text-end">$14.59</td>
+                                                <td class="text-end">70</td>
+                                                <td><span class="badge bg-light-success  f-12">In Stock</span> </td>
+                                                <td class="text-center">
+                                                    <ul class="list-inline me-auto mb-0">
+                                                        <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
+                                                            title="View">
+                                                            <a href="#" class="avtar avtar-xs btn-link-secondary"
+                                                                data-bs-toggle="modal" data-bs-target="#cust-modal">
+                                                                <i class="ti ti-eye f-18"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
+                                                            title="Edit">
+                                                            <a href="../application/ecom_product-add.html"
+                                                                class="avtar avtar-xs btn-link-primary">
+                                                                <i class="ti ti-edit-circle f-18"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li class="list-inline-item align-bottom" data-bs-toggle="tooltip"
+                                                            title="Delete">
+                                                            <a href="#" class="avtar avtar-xs btn-link-danger">
+                                                                <i class="ti ti-trash f-18"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
