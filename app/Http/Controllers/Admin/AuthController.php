@@ -22,7 +22,7 @@ class AuthController extends Controller
 
     public function login()
     {
-        return view('page.login');
+        return view('page.auth.login');
     }
 
     public function loginpost(LoginRequest $request)
@@ -45,25 +45,44 @@ class AuthController extends Controller
 
     public function register()
     {
-        return view('page.register');
+        return view('page.auth.register');
     }
 
     public function registerpost(RegisterRequest $request)
     {
-        $data = $request->validated();
-        $this->userService->createUser($data);
-        $cer = Auth::attempt(['email' => $data['email'], 'password' => $data['password']], $request->remember);
+        $this->userService->createUser($request);
         return redirect()->route('home');
     }
 
+    
     public function resetPassword()
     {
-        return view('page.resetPassword');
+        return view('page.auth.resetPassword');
     }
 
     public function logout()
     {
         Auth::logout();
         return redirect()->route('login');
+    }
+
+    public function showProfileAccount()
+    {
+        return view('page.auth.accountProfile');
+    }
+
+    public function forgotPassword()
+    {
+        return view('page.auth.forgotPassword');
+    }
+
+    public function checkMail()
+    {
+        return view('page.auth.checkMail');
+    }
+
+    public function codeVerification()
+    {
+        return view('page.auth.codeVerification');
     }
 }
