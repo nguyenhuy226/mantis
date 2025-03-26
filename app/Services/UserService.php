@@ -14,17 +14,16 @@ class UserService
     public function createUser($request)
     {
         $data = $request->validated();
-
         // check if there is an image file
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('images/application'), $imageName);
+            $request->image->move(public_path('images/user'), $imageName);
 
             // Save file name to authenticated data
             $data['image'] = $imageName; // Update file name to data array
 
         }
-        User::createProduct($data);
+        User::createUser($data);
     }
 
     /**
@@ -52,17 +51,34 @@ class UserService
         }
     }
 
-    //      /**
-    //      * update product.
-    //      * @param array $data
-    //      * @param string|int $id
-    //      *
-    //      */
-    //     public function updateProduct(array $data, string|int $id): void
-    //     {
-    //         $product = Product::findOrFail($id);
-    //         $product->update($data);
-    //     }
+    /**
+     * update user.
+     * @param array $data
+     * @param string|int $id
+     *
+     */
+    public function updateUser($request, string|int $id): void
+    {
+        $data = $request->validated();
+        $image = User::getUserDetail($id)->image;
+
+        // check if there is an image file
+        if ($request->hasFile('image')) {
+            // check if there are old photos
+            if ($image) {
+                $oldImagePath = public_path('images/user/' . $image);
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath); // delete file
+                }
+            }
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('images/user'), $imageName);
+
+            // Save file name to authenticated data
+            $data['image'] = $imageName; // Update file name to data array
+        }
+        User::updateUser($data, $id);
+    }
 
     /**
      * deleta user.

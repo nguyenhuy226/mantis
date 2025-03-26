@@ -63,8 +63,8 @@
                                                 <td>
                                                     <div class="row">
                                                         <div class="col-auto pe-0">
-                                                            <img src="{{ asset('/images/user/avatar-1.jpg') }}"
-                                                                alt="user-image" class="wid-40 rounded-circle">
+                                                            <img src="{{ $user->image ? asset('/images/user/' . $user->image) : asset('/images/user/avatar-2.jpg') }}"
+                                                                alt="user-image" class="wid-40 rounded-circle hei-40">
                                                         </div>
                                                         <div class="col">
                                                             <h5 class="mb-0">{{ $user->name }}</h5>

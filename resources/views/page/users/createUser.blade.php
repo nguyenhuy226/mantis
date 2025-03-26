@@ -40,7 +40,7 @@
                                                     <label class="form-label">Name</label>
                                                     <input type="text"
                                                         class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
-                                                        placeholder="Enter Product Name" name="name">
+                                                        placeholder="Enter Name" name="name">
                                                     @error('name')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -49,7 +49,7 @@
                                                     <label class="form-label">Phone</label>
                                                     <input type="text"
                                                         class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}"
-                                                        placeholder="Enter Product Description" name="phone">
+                                                        placeholder="Enter Phone" name="phone">
                                                     @error('phone')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -62,9 +62,9 @@
                                             <div class="card-body">
                                                 <div class="form-group">
                                                     <label class="form-label">Password</label>
-                                                    <input type="text"
+                                                    <input type="password"
                                                         class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}"
-                                                        placeholder="Enter Product Category" name="password">
+                                                        placeholder="Enter Password" name="password">
                                                     @error('password')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -73,7 +73,7 @@
                                                     <label class="form-label">email</label>
                                                     <input type="text"
                                                         class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
-                                                        placeholder="Enter Product Category" name="email">
+                                                        placeholder="Enter Email" name="email">
                                                     @error('email')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror

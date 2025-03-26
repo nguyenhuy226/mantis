@@ -25,9 +25,23 @@
     @include('widget.footer-js')
 </body>
 <!-- [Body] end -->
-!-- [Page Specific JS] start -->
+<!-- [Page Specific JS] start -->
 <script src="../assets/js/plugins/simple-datatables.js"></script>
 <script>
+    function previewImage(event) {
+        const imagePreview = document.getElementById('imagePreview');
+        const file = event.target.files[0]; // get firt file from input file
+
+        if (file) {
+            const reader = new FileReader(); // create a FileReader to read file
+
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result; // Cập nhật src của thẻ img với dữ liệu hình ảnh
+            }
+
+            reader.readAsDataURL(file); // Đọc tệp dưới dạng URL
+        }
+    }
     const dataTable = new simpleDatatables.DataTable('#pc-dt-simple', {
         sortable: false,
         perPage: 5

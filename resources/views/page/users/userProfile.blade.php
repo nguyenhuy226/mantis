@@ -34,38 +34,23 @@
                     </div>
                 @else
                     <div class="col-sm-12">
-                        <div class="card profile-wave-card">
-                            <img src="{{ asset('/images/profile/img-profile-top.svg') }}" alt="images"
-                                class="img-fluid profille-wave-img wave-top">
-                            {{-- <img src="../assets/images/profile/img-profile-bottom.svg" alt="images"
-                                class="img-fluid profille-wave-img wave-bottom"> --}}
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="d-flex align-items-center">
-                                            <div class="my-n4" style="width:150px">
-                                                <div id="profile-chart"></div>
-                                            </div>
-                                            <div class="ms-3">
-                                                <h5>Edit Your Profile</h5>
-                                                <p class="mb-0">Complete your profile to unlock all features</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="btn btn-primary my-3">Edit Your Profile</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="card">
                                     <div class="card-body position-relative">
                                         <div class="text-center">
-                                            <div class="chat-avtar d-inline-flex mx-auto">
-                                                <img class="rounded-circle img-fluid wid-120"
-                                                    src="{{ asset('/images/user/avatar-5.jpg') }}" alt="User image">
+                                            <div>
+                                                <div class="chat-avtar mx-auto">
+                                                    <img class="rounded-circle img-fluid wid-150 hei-150"
+                                                        src="{{ $user->image ? asset('/images/user/' . $user->image) : asset('/images/user/avatar-2.jpg') }}"
+                                                        alt="User image" id="imagePreview">
+                                                </div>
+                                                <label for="uplfile" class="img-avtar-upload">
+                                                    <i class="ti ti-camera f-24 mb-1"></i>
+                                                    <span>Upload</span>
+                                                </label>
+                                                <input type="file" id="uplfile" class="d-none" form="updateForm"
+                                                    onchange="previewImage(event)" name="image">
                                             </div>
                                             <h5 class="mt-3">{{ $user->name }}</h5>
                                             <p class="text-muted">Full Stack Developer</p>
@@ -130,40 +115,63 @@
                                     <div class="tab-pane fade show active" id="user-cont-1" role="tabpanel">
                                         <div class="card">
                                             <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <h5>Personal Information</h5>
-                                                        <hr class="mb-4">
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label class="form-label">First Name</label>
-                                                            <input type="text" class="form-control"
-                                                                value="{{ $user->name }}">
+                                                <form id="updateForm"
+                                                    action="{{ route('users.update', ['user' => $user->id]) }}"
+                                                    enctype="multipart/form-data" method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <h5>Personal Information</h5>
+                                                            <hr class="mb-4">
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Name</label>
+                                                                <input type="text"
+                                                                    class="form-control  {{ $errors->has('name') ? 'is-invalid' : '' }}"
+                                                                    value="{{ $user->name }}" name="name">
+                                                                @error('name')
+                                                                    <span class="text-danger">{{ $message }}</span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Email Address</label>
+                                                                <input type="email"
+                                                                    class="form-control  {{ $errors->has('email') ? 'is-invalid' : '' }}"
+                                                                    value="{{ $user->email }}" name="email">
+                                                                @error('email')
+                                                                    <span class="text-danger">{{ $message }}</span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Date of Birth (+18)</label>
+                                                                <input type="date"
+                                                                    class="form-control  {{ $errors->has('birthday') ? 'is-invalid' : '' }}"
+                                                                    value="{{ $user->birthday }}" name="birthday">
+                                                                @error('birthday')
+                                                                    <span class="text-danger">{{ $message }}</span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Phone Number</label>
+                                                                <input type="text"
+                                                                    class="form-control  {{ $errors->has('phone') ? 'is-invalid' : '' }}"
+                                                                    placeholder="Phone Number"
+                                                                    value="{{ $user->phone }}" name="phone">
+                                                                @error('phone')
+                                                                    <span class="text-danger">{{ $message }}</span>
+                                                                @enderror
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label class="form-label">Email Address</label>
-                                                            <input type="email" class="form-control"
-                                                                value="{{ $user->email }}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label class="form-label">Date of Birth (+18)</label>
-                                                            <input type="date" class="form-control"
-                                                                value="{{ $user->birthday }}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label class="form-label">Phone Number</label>
-                                                            <input type="text" class="form-control"
-                                                                placeholder="Phone Number" value="{{ $user->phone }}">
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                </form>
 
                                                 <div class="row">
                                                     <div class="col-12">
@@ -245,7 +253,9 @@
                                             </div>
                                             <div class="card-footer text-end btn-page">
                                                 <div class="btn btn-outline-secondary">Cancel</div>
-                                                <div class="btn btn-primary">Save</div>
+                                                <div class="btn btn-primary"><a {{-- onclick="document.getElementById('updateForm').submit(); return false;" --}}
+                                                        onclick="event.preventDefault(); document.getElementById('updateForm').submit()">Save</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

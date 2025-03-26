@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest\RegisterRequest;
+use App\Http\Requests\UserRequest\UpdateUserRequest;
 use App\Services\UserService;
-use Illuminate\Http\Request;
+
 
 class UserController extends Controller
 {
@@ -20,6 +21,7 @@ class UserController extends Controller
     public function index()
     {
         $usersList = $this->userService->getUserList();
+
         return view('page.users.usersList', ['userList' => $usersList]);
     }
 
@@ -37,6 +39,7 @@ class UserController extends Controller
     public function store(RegisterRequest $request)
     {
         $message = $this->userService->createUser($request);
+
         return redirect()->route('users.index');
     }
 
@@ -46,6 +49,7 @@ class UserController extends Controller
     public function show(string $user)
     {
         $user = $this->userService->getUserDetail($user);
+
         return view('page.users.userProfile', ['user' => $user]);
     }
 
@@ -60,9 +64,11 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, string $id)
     {
-        //
+        $this->userService->updateUser($request, $id);
+
+        return redirect()->route('users.index');
     }
 
     /**
@@ -71,6 +77,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $message = $this->userService->deleteUser($id);
+
         return redirect()->route('users.index')->with('message', $message);
     }
 

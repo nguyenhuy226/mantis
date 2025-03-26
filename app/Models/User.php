@@ -29,7 +29,8 @@ class User extends Authenticatable
         'email',
         'phone',
         'password',
-        'image'
+        'image',
+        'birthday'
     ];
 
     /**
@@ -92,5 +93,11 @@ class User extends Authenticatable
     {
         $user = self::find($id);
         return $user->delete();
+    }
+
+    public static function updateUser($data, $id)
+    {
+        $user = self::findOrFail($id);
+        return $user->update($data);
     }
 }
