@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
+    const STATUS_VERIFIED = 'Verified';
+    const STATUS_REJECTED = 'Rejected';
+    const STATUS_PENDING = 'Pending';
+
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, SoftDeletes;
     protected $table = "users";
@@ -25,6 +29,7 @@ class User extends Authenticatable
         'email',
         'phone',
         'password',
+        'image'
     ];
 
     /**
@@ -59,5 +64,33 @@ class User extends Authenticatable
     {
         $data['password'] = Hash::make($data['password']);
         return self::create($data);
+    }
+
+    public static function getUserList()
+    {
+        return self::all();
+    }
+
+    public static function getUserDetail($id)
+    {
+        return self::find($id);
+    }
+
+    public function getNameStatusAttribute()
+    {
+        switch ($this->status) {
+            case 1:
+                return User::STATUS_VERIFIED;
+            case 0:
+                return User::STATUS_REJECTED;
+            default:
+                return User::STATUS_PENDING;
+        }
+    }
+
+    public static function deleteUser($id)
+    {
+        $user = self::find($id);
+        return $user->delete();
     }
 }
