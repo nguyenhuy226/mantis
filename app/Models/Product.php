@@ -42,4 +42,9 @@ class Product extends Model
     {
         return self::create($data);
     }
+
+    public static function getProductList()
+    {
+        return self::all();
+    }
 }
