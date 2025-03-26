@@ -35,6 +35,16 @@ class ProductService
         }
     }
 
+    /**
+     * get product list
+     *
+     * @return Product
+     */
+    public function getProductList()
+    {
+        return Product::getProductlist();
+    }
+
     //     /**
     //      * create product.
     //      * @param array $data
