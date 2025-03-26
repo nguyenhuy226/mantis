@@ -7,33 +7,50 @@ use App\Models\User;
 class UserService
 {
     /**
-     * get product list.
+     * create user
+     *
+     * @return string
+     */
+    public function createUser($request)
+    {
+        $data = $request->validated();
+
+        // check if there is an image file
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('images/application'), $imageName);
+
+            // Save file name to authenticated data
+            $data['image'] = $imageName; // Update file name to data array
+
+        }
+        User::createProduct($data);
+    }
+
+    /**
+     * get user list
      *
      * @return User
      */
-    public function createUser(array $data): User
+    public function getUserList()
     {
-        return User::createUser($data);
+        return User::getUserlist();
     }
 
-    //     /**
-    //      * create product.
-    //      * @param array $data
-    //      * @return Product
-    //      */
-    //     public function createProduct(array $data): Product
-    //     {
-    //         return Product::create($data);
-    //     }
-    //      /**
-    //      * get product detail.
-    //      * @param string|int  $id
-    //      * @return Product
-    //      */
-    //     public function getProductDetail(string|int $id): Product
-    //     {
-    //         return Product::getProductDetail($id);
-    //     }
+    /**
+     * get user detail.
+     * @param string|int  $id
+     * @return User
+     */
+    public function getUserDetail(string|int $id)
+    {
+        try {
+            $user = User::getUserDetail($id);
+            return $user;
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
 
     //      /**
     //      * update product.
@@ -47,16 +64,20 @@ class UserService
     //         $product->update($data);
     //     }
 
-    //      /**
-    //      * deleta product.
-    //      * @param string|int $id
-    //      */
+    /**
+     * deleta user.
+     * @param string|int $id
+     */
 
-    //     public function deleteProduct(string|int $id): void
-    //     {
-    //         $product = Product::findOrFail($id);
-    //         $product->delete();
-    //     }
+    public function deleteUser(string|int $id)
+    {
+        try {
+            $product = User::deleteUser($id);
+            return 'đã xóa User thành công';
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
 
     //     // public function restoreUser($id): User
     //     // {
