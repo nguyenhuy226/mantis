@@ -3,16 +3,26 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\AuthRequest\RegisterRequest;
+use App\Http\Requests\UserRequest\UpdateUserRequest;
+use App\Services\UserService;
+
 
 class UserController extends Controller
 {
+    public function __construct(
+        private UserService  $userService,
+    ) {}
+
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('page.users.usersList');
+        $usersList = $this->userService->getUserList();
+
+        return view('page.users.usersList', ['userList' => $usersList]);
     }
 
     /**
@@ -20,23 +30,27 @@ class UserController extends Controller
      */
     public function create()
     {
-        return  view();
+        return  view('page.users.createUser');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
-        //
+        $message = $this->userService->createUser($request);
+
+        return redirect()->route('users.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $user)
     {
-        return view('page.users.userProfile');
+        $user = $this->userService->getUserDetail($user);
+
+        return view('page.users.userProfile', ['user' => $user]);
     }
 
     /**
@@ -50,20 +64,25 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, string $id)
     {
-        //
+        $this->userService->updateUser($request, $id);
+
+        return redirect()->route('users.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $message = $this->userService->deleteUser($id);
+
+        return redirect()->route('users.index')->with('message', $message);
     }
 
-    public function showCard() {
+    public function showCard()
+    {
         return view('page.users.userCard');
     }
 }

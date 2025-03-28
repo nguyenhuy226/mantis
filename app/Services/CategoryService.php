@@ -13,7 +13,7 @@ class CategoryService
      */
     public function getListCategory()
     {
-        return Category::getListCategory() ;
+        return Category::getListCategory(1) ;
     }
 
     //     /**

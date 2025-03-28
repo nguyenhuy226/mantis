@@ -17,13 +17,10 @@ Route::get('/reset-password', [AuthController::class, 'resetPassword'])->name('r
 Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('forgotPassword');
 Route::get('/check-mail', [AuthController::class, 'checkMail'])->name('checkMail');
 Route::get('/code-verification', [AuthController::class, 'codeVerification'])->name('codeVerification');
-Route::get('/account-profile', [AuthController::class, 'showProfileAccount'])->name('showProfileAccount');
-Route::get('/user-card', [UserController::class, 'showCard'])->name('user.showcard');
+
 Route::get('/data', [WidgetController::class, 'data'])->name('widget.data');
 Route::get('/chart', [WidgetController::class, 'chart'])->name('widget.chart');
 Route::get('/statistics', [WidgetController::class, 'statistics'])->name('widget.statistics');
-Route::resource('/products', ProductController::class);
-Route::resource('/users', UserController::class);
 
 Route::get('/table/api', [TableController::class, 'data'])->name('table.data');
 Route::get('/table/basic', [TableController::class, 'basic'])->name('table.basic');
@@ -97,6 +94,11 @@ Route::get('/map', [ChartController::class, 'map'])->name('map');
 
 
 Route::middleware('login')->group(function () {
+    Route::resource('/users', UserController::class);
+    Route::get('/user-card', [UserController::class, 'showCard'])->name('user.showcard');
+    Route::get('/account-profile', [AuthController::class, 'showProfileAccount'])->name('showProfileAccount');
+    Route::resource('/products', ProductController::class);
+
     Route::get('/', [AuthController::class, 'index'])->name('home');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });

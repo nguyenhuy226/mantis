@@ -7,56 +7,93 @@ use App\Models\User;
 class UserService
 {
     /**
-     * get product list.
+     * create user
+     *@param CreateUserRequest $request
+     * @return string
+     */
+    public function createUser($request)
+    {
+        $data = $request->validated();
+        // check if there is an image file
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('images/user'), $imageName);
+
+            // Save file name to authenticated data
+            $data['image'] = $imageName; // Update file name to data array
+
+        }
+        User::createUser($data);
+    }
+
+    /**
+     * get user list
      *
      * @return User
      */
-    public function createUser(array $data): User
+    public function getUserList()
     {
-        return User::createUser($data);
+        return User::getUserlist();
     }
 
-    //     /**
-    //      * create product.
-    //      * @param array $data
-    //      * @return Product
-    //      */
-    //     public function createProduct(array $data): Product
-    //     {
-    //         return Product::create($data);
-    //     }
-    //      /**
-    //      * get product detail.
-    //      * @param string|int  $id
-    //      * @return Product
-    //      */
-    //     public function getProductDetail(string|int $id): Product
-    //     {
-    //         return Product::getProductDetail($id);
-    //     }
+    /**
+     * get user detail.
+     * @param string|int  $id
+     * @return User
+     */
+    public function getUserDetail(string|int $id)
+    {
+        try {
+            $user = User::getUserDetail($id);
+            return $user;
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
 
-    //      /**
-    //      * update product.
-    //      * @param array $data
-    //      * @param string|int $id
-    //      *
-    //      */
-    //     public function updateProduct(array $data, string|int $id): void
-    //     {
-    //         $product = Product::findOrFail($id);
-    //         $product->update($data);
-    //     }
+    /**
+     * update user.
+     * @param array $data
+     * @param string|int $id
+     *
+     */
+    public function updateUser($request, string|int $id): void
+    {
+        $data = $request->validated();
+        $image = User::getUserDetail($id)->image;
 
-    //      /**
-    //      * deleta product.
-    //      * @param string|int $id
-    //      */
+        // check if there is an image file
+        if ($request->hasFile('image')) {
+            // check if there are old photos
+            if ($image) {
+                $oldImagePath = public_path('images/user/' . $image);
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath); // delete file
+                }
+            }
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('images/user'), $imageName);
 
-    //     public function deleteProduct(string|int $id): void
-    //     {
-    //         $product = Product::findOrFail($id);
-    //         $product->delete();
-    //     }
+            // Save file name to authenticated data
+            $data['image'] = $imageName; // Update file name to data array
+        }
+        User::updateUser($data, $id);
+    }
+
+    /**
+     * deleta user.
+     * @param string|int $id
+     */
+
+    public function deleteUser(string|int $id)
+    {
+        try {
+            $product = User::deleteUser($id);
+            return 'đã xóa User thành công';
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
 
     //     // public function restoreUser($id): User
     //     // {

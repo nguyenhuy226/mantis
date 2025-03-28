@@ -50,12 +50,11 @@ class AuthController extends Controller
 
     public function registerpost(RegisterRequest $request)
     {
-        $data = $request->validated();
-        $this->userService->createUser($data);
-        $cer = Auth::attempt(['email' => $data['email'], 'password' => $data['password']], $request->remember);
+        $this->userService->createUser($request);
         return redirect()->route('home');
     }
 
+    
     public function resetPassword()
     {
         return view('page.auth.resetPassword');

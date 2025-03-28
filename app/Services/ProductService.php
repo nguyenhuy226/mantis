@@ -8,7 +8,7 @@ class ProductService
 {
     /**
      * create Product
-     *
+     * @param CreatProductRequest $request
      * @return string
      */
     public function createProduct($request): string
@@ -33,6 +33,16 @@ class ProductService
         } else {
             return 'không load được file ảnh';
         }
+    }
+
+    /**
+     * get product list
+     *
+     * @return Product
+     */
+    public function getProductList()
+    {
+        return Product::getProductlist(1);
     }
 
     //     /**
