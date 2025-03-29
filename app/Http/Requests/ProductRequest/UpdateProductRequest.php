@@ -3,8 +3,9 @@
 namespace App\Http\Requests\ProductRequest;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class CreateProductRequest extends FormRequest
+class UpdateProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +25,15 @@ class CreateProductRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'quantity' => ['required', 'integer'],
+            'product_code' => ['required', 'integer', Rule::unique('products')->ignore($this->route('product'))],
             'description' => ['required', 'string', 'max:255'],
             'status' => ['required'],
             'category_id' => ['required'],
             'price' => ['required', 'min:0', 'numeric'],
-            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'sku' => ['required'],
+            'slug' => ['required'],
+            'keyword' => ['required'],
         ];
     }
 }

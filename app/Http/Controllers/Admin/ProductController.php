@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest\CreateProductRequest;
+use App\Http\Requests\ProductRequest\UpdateProductRequest;
 use App\Services\CategoryService;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
@@ -50,7 +51,9 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        return view('page.products.productDetail');
+        $productRelated = $this->productService->getRelatedProducts($id);
+        $product = $this->productService->getProductDetail($id);
+        return view('page.products.productDetail', ['product' => $product, 'productRelated' => $productRelated]);
     }
 
     /**
@@ -58,15 +61,18 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product = $this->productService->getProductDetail($id);
+        $categories = $this->categoryService->getListCategory();
+        return view('page.products.editProduct', ['product' => $product, 'categories' => $categories]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateProductRequest $request, string $id)
     {
-        //
+        $this->productService->updateProduct($request, $id);
+        return redirect()->route('products.index');
     }
 
     /**
@@ -74,6 +80,8 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $message = $this->productService->deleteProduct($id);
+
+        return redirect()->route('products.index')->with('message', $message);
     }
 }
