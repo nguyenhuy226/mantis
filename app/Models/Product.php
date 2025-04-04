@@ -106,7 +106,7 @@ class Product extends Model
     public static function getRelatedProducts($id)
     {
         $product = Product::find($id);
-        $related =  $product->relatedProducts()->get();
+        $related =  $product?->relatedProducts()->get();
         if ($related) {
             return $related;
         } else {
@@ -127,8 +127,9 @@ class Product extends Model
         }
     }
 
-    public static function updateProduct($data, $id) {
+    public static function updateProduct($data, $id)
+    {
         $product = Product::findOrFail($id);
-            $product->update($data);
+        $product->update($data);
     }
 }

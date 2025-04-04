@@ -53,7 +53,7 @@
                                                     onchange="previewImage(event)" name="image">
                                             </div>
                                             <h5 class="mt-3">{{ $user->name }}</h5>
-                                            <p class="text-muted">Full Stack Developer</p>
+                                            <p class="text-muted">{{ $user->role->name ?? 'member' }}</p>
                                             <ul class="list-inline ms-auto mb-0">
                                                 <li class="list-inline-item">
                                                     <a href="#" class="avtar avtar-xs btn-light-facebook">
@@ -212,31 +212,31 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-12">
-                                                        <h5 class="mt-4">Skills</h5>
+                                                        <h5 class="mt-4">Permissions</h5>
                                                         <hr class="mb-4">
                                                     </div>
-                                                    <div class="col-sm-12">
-                                                        <div class="form-group">
-                                                            <select class="form-control" name="pc_product_tag3"
-                                                                id="pc_product_tag3" multiple>
-                                                                <option value="Choice 1" selected>Adobe XD</option>
-                                                                <option value="Choice 2" selected>Angular</option>
-                                                                <option value="Choice 3" selected>Corel Draw</option>
-                                                                <option value="Choice 4" selected>Figma</option>
-                                                                <option value="Choice 5" selected>HTML</option>
-                                                                <option value="Choice 6" selected>Illustrator</option>
-                                                                <option value="Choice 7" selected>Javascript</option>
-                                                                <option value="Choice 8" selected>Logo Design</option>
-                                                                <option value="Choice 9" selected>Material UI</option>
-                                                                <option value="Choice 10" selected>NodeJS</option>
-                                                                <option value="Choice 11" selected>npm</option>
-                                                                <option value="Choice 12" selected>Photoshop</option>
-                                                                <option value="Choice 13" selected>React</option>
-                                                                <option value="Choice 14" selected>Reduxjs - tooltit
-                                                                </option>
-                                                                <option value="Choice 15" selected>SASS</option>
-                                                            </select>
-                                                        </div>
+                                                    <div class="col-sm-6">
+                                                        <form action="{{ route('users.changePermission', $user->id) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <div class="form-group">
+                                                                <label class="form-label">Admin</label>
+                                                                <input type="radio" value="1" name="role_id"
+                                                                    {{ $user->role_id === 1 ? 'checked' : '' }}></br>
+                                                                <label class="form-label">Editor</label>
+                                                                <input type="radio" value="2" name="role_id"
+                                                                    {{ $user->role_id === 2 ? 'checked' : '' }}></br>
+                                                                <label class="form-label">Viewer</label>
+                                                                <input type="radio" value="3" name="role_id"
+                                                                    {{ $user->role_id === 3 ? 'checked' : '' }}></br>
+                                                                <label class="form-label">Member</label>
+                                                                <input type="radio" value="4" name="role_id"
+                                                                    {{ $user->role_id === 4 ? 'checked' : '' }}>
+                                                            </div>
+                                                            <button type="submit" class="btn btn-primary">Change
+                                                                Permission</button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                                 <div class="row">

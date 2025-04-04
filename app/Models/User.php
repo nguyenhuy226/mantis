@@ -30,7 +30,8 @@ class User extends Authenticatable
         'phone',
         'password',
         'image',
-        'birthday'
+        'birthday',
+        'role_id'
     ];
 
     /**
@@ -64,6 +65,18 @@ class User extends Authenticatable
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function hasPermission($permission)
+    {
+        $jsonEmptyArray = json_encode([]);
+        // dd(in_array($permission, json_decode($this->role->permissions ?? $jsonEmptyArray, true)));
+        return in_array($permission, json_decode($this->role->permissions ?? $jsonEmptyArray, true));
     }
 
     /**
@@ -138,6 +151,11 @@ class User extends Authenticatable
      */
     public static function updateUser($data, $id)
     {
+        $user = self::findOrFail($id);
+        return $user->update($data);
+    }
+
+    public static function changePermission($data , $id) {
         $user = self::findOrFail($id);
         return $user->update($data);
     }

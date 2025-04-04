@@ -7,7 +7,6 @@ use App\Http\Requests\ProductRequest\CreateProductRequest;
 use App\Http\Requests\ProductRequest\UpdateProductRequest;
 use App\Services\CategoryService;
 use App\Services\ProductService;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -53,7 +52,11 @@ class ProductController extends Controller
     {
         $productRelated = $this->productService->getRelatedProducts($id);
         $product = $this->productService->getProductDetail($id);
-        return view('page.products.productDetail', ['product' => $product, 'productRelated' => $productRelated]);
+        if ($product) {
+            return view('page.products.productDetail', ['product' => $product, 'productRelated' => $productRelated]);
+        } else {
+            return view('page._404');
+        }
     }
 
     /**
