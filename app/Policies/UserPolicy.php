@@ -10,6 +10,10 @@ class UserPolicy
     {
         return in_array($currentUser?->role?->name, ['admin', 'editor', 'viewer']);
     }
+    public function changePermission(User $currentUser)
+    {
+        return $currentUser?->role?->name === 'admin';
+    }
     public function create(User $user)
     {
         return $user->hasPermission('create_users');

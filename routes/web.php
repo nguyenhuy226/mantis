@@ -100,6 +100,7 @@ Route::middleware('login')->group(function () {
     Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show')->middleware('can:view,App\Models\User');
     Route::post('/users', [UserController::class, 'store'])->name('users.store')->middleware('can:create,App\Models\App\Models\User');
     Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update')->middleware('can:update,App\Models\User');
+    Route::put('/change-permission/{user}', [UserController::class, 'changePermission'])->name('users.changePermission')->middleware('can:changePermission,App\Models\User');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy')->middleware('can:delete,App\Models\User');
 
     Route::get('/products', [ProductController::class, 'index'])->name('products.index')->middleware('can:viewAny,App\Models\Product');

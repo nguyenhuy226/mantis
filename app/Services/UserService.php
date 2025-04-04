@@ -95,11 +95,11 @@ class UserService
         }
     }
 
-    //     // public function restoreUser($id): User
-    //     // {
-    //     //     // Khôi phục user đã bị xóa mềm
-    //     //     $user = User::withTrashed()->find($id); // Tìm cả bản ghi đã bị xóa mềm
-    //     //     return $user->restore();
-    //     // }
-    // }
+    public function changePermission($request, $id)
+    {
+        $data = $request->validate([
+            'role_id' => ['required', 'in:1,2,3,4']
+        ]);
+        User::changePermission($data, $id);
+    }
 }

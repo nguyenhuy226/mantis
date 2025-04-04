@@ -30,7 +30,8 @@ class User extends Authenticatable
         'phone',
         'password',
         'image',
-        'birthday'
+        'birthday',
+        'role_id'
     ];
 
     /**
@@ -150,6 +151,11 @@ class User extends Authenticatable
      */
     public static function updateUser($data, $id)
     {
+        $user = self::findOrFail($id);
+        return $user->update($data);
+    }
+
+    public static function changePermission($data , $id) {
         $user = self::findOrFail($id);
         return $user->update($data);
     }
