@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest\RegisterRequest;
 use App\Http\Requests\UserRequest\UpdateUserRequest;
+use App\Models\User;
 use App\Services\UserService;
 
 

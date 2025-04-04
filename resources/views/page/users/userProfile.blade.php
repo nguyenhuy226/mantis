@@ -53,7 +53,7 @@
                                                     onchange="previewImage(event)" name="image">
                                             </div>
                                             <h5 class="mt-3">{{ $user->name }}</h5>
-                                            <p class="text-muted">Full Stack Developer</p>
+                                            <p class="text-muted">{{ $user->role->name ?? 'member' }}</p>
                                             <ul class="list-inline ms-auto mb-0">
                                                 <li class="list-inline-item">
                                                     <a href="#" class="avtar avtar-xs btn-light-facebook">

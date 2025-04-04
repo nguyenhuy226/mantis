@@ -94,10 +94,24 @@ Route::get('/map', [ChartController::class, 'map'])->name('map');
 
 
 Route::middleware('login')->group(function () {
-    Route::resource('/users', UserController::class);
+
+    Route::get('/users', [UserController::class, 'index'])->name('users.index')->middleware('can:viewAny,App\Models\User');
+    Route::get('/users/create', [UserController::class, 'create'])->name('users.create')->middleware('can:create,App\Models\User');
+    Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show')->middleware('can:view,App\Models\User');
+    Route::post('/users', [UserController::class, 'store'])->name('users.store')->middleware('can:create,App\Models\App\Models\User');
+    Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update')->middleware('can:update,App\Models\User');
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy')->middleware('can:delete,App\Models\User');
+
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index')->middleware('can:viewAny,App\Models\Product');
+    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create')->middleware('can:create,App\Models\Product');
+    Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show')->middleware('can:view,App\Models\Product');
+    Route::post('/products', [ProductController::class, 'store'])->name('products.store')->middleware('can:create,App\Models\App\Models\Product');
+    Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update')->middleware('can:update,App\Models\Product');
+    Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit')->middleware('can:update,App\Models\Product');
+    Route::delete('/products/{roduct}', [ProductController::class, 'destroy'])->name('products.destroy')->middleware('can:delete,App\Models\Product');
+
     Route::get('/user-card', [UserController::class, 'showCard'])->name('user.showcard');
     Route::get('/account-profile', [AuthController::class, 'showProfileAccount'])->name('showProfileAccount');
-    Route::resource('/products', ProductController::class);
 
     Route::get('/', [AuthController::class, 'index'])->name('home');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

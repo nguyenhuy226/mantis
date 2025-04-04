@@ -66,6 +66,18 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function hasPermission($permission)
+    {
+        $jsonEmptyArray = json_encode([]);
+        // dd(in_array($permission, json_decode($this->role->permissions ?? $jsonEmptyArray, true)));
+        return in_array($permission, json_decode($this->role->permissions ?? $jsonEmptyArray, true));
+    }
+
     /**
      * Create a new user.
      *
