@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
+    const STATUS_IN_STOCK = 'In Stock';
+    const STATUS_STOCK = 'Stock';
+    const STATUS_PENDING = 'Pending';
+
     use SoftDeletes;
     protected $table = "products";
     /**
@@ -48,6 +52,12 @@ class Product extends Model
         return $this->hasMany(OrderDetail::class);
     }
 
+
+    public function relatedProducts()
+    {
+        return $this->category->products()->where('id', '!=', $this->id);
+    }
+
     /**
      * Create a new product.
      *
@@ -68,5 +78,58 @@ class Product extends Model
     public static function getProductList($status)
     {
         return self::all();
+    }
+
+    /**
+     * Get the details of a product by their ID.
+     *
+     * @param int $id The ID of the user to retrieve.
+     * @return \App\Models\Product|null The product instance if found, null otherwise.
+     */
+    public static function getProductDetail($id)
+    {
+        return self::find($id);
+    }
+
+    /**
+     * Delete a product by their ID.
+     *
+     * @param int $id The ID of the user to delete.
+     * @return bool True if the product was deleted successfully, false otherwise.
+     */
+    public static function deleteProduct($id)
+    {
+        $product = self::find($id);
+        return $product->delete();
+    }
+
+    public static function getRelatedProducts($id)
+    {
+        $product = Product::find($id);
+        $related =  $product?->relatedProducts()->get();
+        if ($related) {
+            return $related;
+        } else {
+            return [];
+        }
+    }
+
+    public function getNameStatusAttribute()
+    {
+        switch ($this->status) {
+            case 1:
+                return Product::STATUS_IN_STOCK;
+            case 0:
+                return Product::STATUS_STOCK;
+            default:
+                // return Product::STATUS_PENDING;
+                return $this->status;
+        }
+    }
+
+    public static function updateProduct($data, $id)
+    {
+        $product = Product::findOrFail($id);
+        $product->update($data);
     }
 }

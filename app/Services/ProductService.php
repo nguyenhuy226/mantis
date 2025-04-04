@@ -18,7 +18,6 @@ class ProductService
         $data['keyword'] = $data['name'];
         $data['slug'] = $data['name'];
         $data['sku'] = $data['name'];
-        $data['image'] = $data['name'];
 
         // check if there is an image file
         if ($request->hasFile('image')) {
@@ -29,7 +28,6 @@ class ProductService
             $data['image'] = $imageName; // Update file name to data array
             Product::createProduct($data);
             return 'Sản phẩm đã được tạo thành công.';
-
         } else {
             return 'không load được file ảnh';
         }
@@ -45,47 +43,63 @@ class ProductService
         return Product::getProductlist(1);
     }
 
-    //     /**
-    //      * create product.
-    //      * @param array $data
-    //      * @return Product
-    //      */
-    //     public function createProduct(array $data): Product
-    //     {
-    //         return Product::create($data);
-    //     }
-    //      /**
-    //      * get product detail.
-    //      * @param string|int  $id
-    //      * @return Product
-    //      */
-    //     public function getProductDetail(string|int $id): Product
-    //     {
-    //         return Product::getProductDetail($id);
-    //     }
+    /**
+     * get product detail.
+     * @param string|int  $id
+     * @return Product
+     */
+    public function getProductDetail(string|int $id)
+    {
+        return Product::getProductDetail($id);
+    }
 
-    //      /**
-    //      * update product.
-    //      * @param array $data
-    //      * @param string|int $id
-    //      *
-    //      */
-    //     public function updateProduct(array $data, string|int $id): void
-    //     {
-    //         $product = Product::findOrFail($id);
-    //         $product->update($data);
-    //     }
+    /**
+     * update product.
+     * @param request $data
+     * @param string|int $id
+     *
+     */
+    public function updateProduct($request, string|int $id): string
+    {
+        $data = $request->validated();
+        try {
+            $image = Product::getProductDetail($id)->image;
+            // check if there is an image file
+            if ($request->hasFile('image')) {
+                // check if there are old photos
+                if ($image) {
+                    $oldImagePath = public_path('images/application/' . $image);
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath); // delete file
+                    }
+                }
+                $imageName = time() . '.' . $request->image->extension();
+                $request->image->move(public_path('images/application'), $imageName);
 
-    //      /**
-    //      * deleta product.
-    //      * @param string|int $id
-    //      */
+                // Save file name to authenticated data
+                $data['image'] = $imageName; // Update file name to data array
+            }
+            Product::updateProduct($data, $id);
+            return $message = 'update product successly';
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
 
-    //     public function deleteProduct(string|int $id): void
-    //     {
-    //         $product = Product::findOrFail($id);
-    //         $product->delete();
-    //     }
+    /**
+     * delete product.
+     * @param string|int $id
+     */
+
+    public function deleteProduct(string|int $id)
+    {
+        try {
+            $product = Product::deleteProduct($id);
+            return 'đã xóa Product thành công';
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
 
     //     // public function restoreUser($id): User
     //     // {
@@ -94,4 +108,9 @@ class ProductService
     //     //     return $user->restore();
     //     // }
     // }
+
+    public function getRelatedProducts($id)
+    {
+        return Product::getRelatedProducts($id);
+    }
 }
