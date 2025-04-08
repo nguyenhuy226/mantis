@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest\RegisterRequest;
 use App\Http\Requests\UserRequest\UpdateUserRequest;
+use App\Models\User;
 use App\Services\UserService;
-
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -84,5 +85,12 @@ class UserController extends Controller
     public function showCard()
     {
         return view('page.users.userCard');
+    }
+
+    public function changePermission(Request $request, $id)
+    {
+        $this->userService->changePermission($request, $id);
+
+        return redirect()->back();
     }
 }
