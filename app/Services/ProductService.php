@@ -68,13 +68,13 @@ class ProductService
             if ($request->hasFile('image')) {
                 // check if there are old photos
                 if ($image) {
-                    $oldImagePath = public_path('images/application/' . $image);
+                    $oldImagePath = public_path('images/product/' . $image);
                     if (file_exists($oldImagePath)) {
                         unlink($oldImagePath); // delete file
                     }
                 }
                 $imageName = time() . '.' . $request->image->extension();
-                $request->image->move(public_path('images/application'), $imageName);
+                $request->image->move(public_path('images/product'), $imageName);
 
                 // Save file name to authenticated data
                 $data['image'] = $imageName; // Update file name to data array

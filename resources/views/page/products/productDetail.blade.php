@@ -41,7 +41,7 @@
                                             <div class="text-center mt-3">
                                                 <div class="chat-avtar d-inline-flex mx-auto">
                                                     <img class="img-fluid"
-                                                        src="{{ asset('/images/application/' . $product->image) }}"
+                                                        src="{{ asset('/images/product/' . $product->image) }}"
                                                         alt="User image">
                                                 </div>
                                             </div>

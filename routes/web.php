@@ -116,4 +116,5 @@ Route::middleware('login')->group(function () {
 
     Route::get('/', [AuthController::class, 'index'])->name('home');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
 });

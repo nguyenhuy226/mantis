@@ -41,7 +41,7 @@
                                                 <td>
                                                     <div class="row">
                                                         <div class="col-auto pe-0">
-                                                            <img src="{{ asset('/images/application/' . $product->image) }}"
+                                                            <img src="{{ asset('/images/product/' . $product->image) }}"
                                                                 alt="user-image" class="wid-40 rounded-circle hei-40">
                                                         </div>
                                                         <div class="col">

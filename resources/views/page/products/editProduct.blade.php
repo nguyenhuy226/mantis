@@ -34,7 +34,7 @@
                                 <div>
                                     <div class="chat-avtar mx-auto">
                                         <img class=" img-fluid" style="width: 350px; height: 350px"
-                                            src="{{ $product->image ? asset('/images/application/' . $product->image) : asset('/images/application/card.png') }}"
+                                            src="{{ $product->image ? asset('/images/product/' . $product->image) : asset('/images/application/card.png') }}"
                                             alt="User image" id="imagePreview">
                                     </div>
                                     <label for="uplfile" class="img-avtar-upload" style="padding: 10px 0 10px 0">
