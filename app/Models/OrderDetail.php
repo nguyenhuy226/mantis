@@ -6,8 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderDetail extends Model
 {
-    protected $table = "OrderDetails";
-
+    protected $table = "order_items";
+    protected $fillable = [
+        'order_id',
+        'product_id',
+        'quantity',
+        'price',
+    ];
      /**
      * Get the order that owns the model.
      *

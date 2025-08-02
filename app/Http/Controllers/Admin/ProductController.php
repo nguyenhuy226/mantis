@@ -65,6 +65,7 @@ class ProductController extends Controller
     public function edit(string $id)
     {
         $product = $this->productService->getProductDetail($id);
+
         $categories = $this->categoryService->getListCategory();
         return view('page.products.editProduct', ['product' => $product, 'categories' => $categories]);
     }

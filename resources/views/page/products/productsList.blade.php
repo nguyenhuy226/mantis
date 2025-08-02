@@ -33,9 +33,9 @@
                                         @foreach ($productList as $product)
                                             <tr>
                                                 <td>
-                                                    <div class="form-check">
+                                                    {{-- <div class="form-check">
                                                         <input class="form-check-input" type="checkbox">
-                                                    </div>
+                                                    </div> --}}
                                                 </td>
                                                 <td class="text-end">{{ $product->id }}</td>
                                                 <td>

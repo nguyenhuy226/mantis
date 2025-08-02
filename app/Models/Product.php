@@ -55,7 +55,12 @@ class Product extends Model
 
     public function relatedProducts()
     {
-        return $this->category->products()->where('id', '!=', $this->id);
+        return $this->where('id', '!=', $this->id);
+    }
+
+    public function wishlistedBy()
+    {
+        return $this->belongsToMany(Customer::class, 'wishlist', 'product_id', 'customer_id')->withTimestamps();
     }
 
     /**
@@ -103,6 +108,16 @@ class Product extends Model
         return $product->delete();
     }
 
+
+    /**
+     * Get the related products for a given product ID.
+     *
+     * This method attempts to find the product by ID and then fetch its related products.
+     * If the product is not found or has no related products, it returns an empty array.
+     *
+     * @param int $id The ID of the product.
+     * @return \Illuminate\Support\Collection|array A collection of related products or an empty array.
+     */
     public static function getRelatedProducts($id)
     {
         $product = Product::find($id);
@@ -113,6 +128,17 @@ class Product extends Model
             return [];
         }
     }
+
+
+    /**
+     * Get the name of the product status based on its numeric value.
+     *
+     * This accessor returns a human-readable status string using constants
+     * defined in the Product model. If the status is not recognized, it returns
+     * the raw status value.
+     *
+     * @return string|int
+     */
 
     public function getNameStatusAttribute()
     {
@@ -127,6 +153,19 @@ class Product extends Model
         }
     }
 
+    /**
+     * Update product information by product ID.
+     *
+     * This method finds a product by its ID and updates it with the provided data.
+     * If the product is not found, a ModelNotFoundException will be thrown.
+     *
+     * @param array $data The validated data to update the product.
+     * @param int $id The ID of the product to update.
+     *
+     * @return void
+     *
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     */
     public static function updateProduct($data, $id)
     {
         $product = Product::findOrFail($id);

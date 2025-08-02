@@ -56,12 +56,6 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="form-label">Category</label>
-                                                    {{-- <select
-                                                        class="form-select {{ $errors->has('category_id') ? 'is-invalid' : '' }}"
-                                                        name="category_id">
-                                                        <option value=1>In Stock</option>
-                                                        <option value=0>Out of Stock</option>
-                                                    </select> --}}
                                                     <select
                                                         class="form-select {{ $errors->has('category_id') ? 'is-invalid' : '' }}"
                                                         name="category_id">

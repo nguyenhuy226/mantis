@@ -27,6 +27,7 @@ class CreateCustomerRequest extends FormRequest
             'password' => 'required|string|min:8',
             'phone' => 'nullable|string|max:15',
             'birthday' => 'nullable|date',
+            'gender' => 'nullable'
         ];
     }
 }

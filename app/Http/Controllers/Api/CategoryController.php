@@ -3,41 +3,22 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use Illuminate\Http\Request;
+use App\Services\CategoryService;
+
 
 class CategoryController extends Controller
 {
+    public function __construct(
+        private CategoryService  $categoryService,
+    ) {}
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $categories = Category::all();
+        // $categories = Category::all();
+        $categories = $this->categoryService->getListCategory();
         return response()->json($categories, 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

@@ -55,14 +55,6 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(UpdateUserRequest $request, string $id)
@@ -82,11 +74,16 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('message', $message);
     }
 
-    public function showCard()
-    {
-        return view('page.users.userCard');
-    }
 
+    /**
+     * Change the permission/role of a specific user.
+     *
+     * Delegates the permission update logic to the UserService and then redirects back to the previous page.
+     *
+     * @param \Illuminate\Http\Request $request  The incoming HTTP request containing the new permission data.
+     * @param int $id  The ID of the user whose permissions are to be updated.
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function changePermission(Request $request, $id)
     {
         $this->userService->changePermission($request, $id);

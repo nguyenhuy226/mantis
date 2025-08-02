@@ -116,7 +116,7 @@
                                                         class="form-select {{ $errors->has('category_id') ? 'is-invalid' : '' }}"
                                                         name="category_id" value="{{ $product->category_id }}">
                                                         @foreach ($categories as $category)
-                                                            <option value="{{ $category->id }}">{{ $category->name }}
+                                                            <option value="{{ $category->id }}" {{ $category->id == $product->category_id ? 'selected' : '' }}>{{ $category->name }}
                                                             </option>
                                                         @endforeach
                                                     </select>

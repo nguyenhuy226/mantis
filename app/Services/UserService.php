@@ -95,6 +95,16 @@ class UserService
         }
     }
 
+    /**
+     * Update the role/permission of a specific user.
+     *
+     * This method validates the incoming request to ensure the `role_id` is within the allowed set.
+     * Then it delegates the actual update logic to the User model.
+     *
+     * @param \Illuminate\Http\Request $request The HTTP request containing the new role ID.
+     * @param int $id The ID of the user whose permission is to be updated.
+     * @return void
+     */
     public function changePermission($request, $id)
     {
         $data = $request->validate([
