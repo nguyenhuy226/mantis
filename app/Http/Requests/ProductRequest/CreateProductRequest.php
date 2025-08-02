@@ -28,7 +28,7 @@ class CreateProductRequest extends FormRequest
             'status' => ['required'],
             'category_id' => ['required'],
             'price' => ['required', 'min:0', 'numeric'],
-            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
         ];
     }
 }

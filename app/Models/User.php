@@ -30,7 +30,8 @@ class User extends Authenticatable
         'phone',
         'password',
         'image',
-        'birthday'
+        'birthday',
+        'role_id'
     ];
 
     /**
@@ -64,6 +65,26 @@ class User extends Authenticatable
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * Check if the current user has a specific permission.
+     *
+     * This method reads the permissions from the user's role,
+     * which is expected to be a JSON-encoded array of permission strings.
+     *
+     * @param string $permission The permission key to check (e.g. 'edit_post', 'delete_user').
+     * @return bool True if the permission exists, false otherwise.
+     */
+    public function hasPermission($permission)
+    {
+        $jsonEmptyArray = json_encode([]);
+        return in_array($permission, json_decode($this->role->permissions ?? $jsonEmptyArray, true));
     }
 
     /**
@@ -137,6 +158,25 @@ class User extends Authenticatable
      * @return bool True if the user was updated successfully, false otherwise.
      */
     public static function updateUser($data, $id)
+    {
+        $user = self::findOrFail($id);
+        return $user->update($data);
+    }
+
+    /**
+     * Update the user's permission (e.g. role_id) by user ID.
+     *
+     * This method finds the user by ID and updates their permission data.
+     * If the user is not found, a ModelNotFoundException will be thrown.
+     *
+     * @param array $data An associative array of permission data (e.g. ['role_id' => 2]).
+     * @param int $id The ID of the user to update.
+     * @return bool True if the update was successful, false otherwise.
+     *
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     */
+
+    public static function changePermission($data, $id)
     {
         $user = self::findOrFail($id);
         return $user->update($data);

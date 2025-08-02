@@ -87,11 +87,6 @@
                                                             </a>
                                                         </li>
                                                         <li class="list-inline-item align-bottom">
-                                                            <a href="#" class="avtar avtar-xs btn-link-primary">
-                                                                <i class="ti ti-edit-circle f-18"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="list-inline-item align-bottom">
                                                             <form action="{{ route('users.destroy', $user->id) }}"
                                                                 id="delete-form-{{ $user->id }}" method="POST"
                                                                 class="mx-2">

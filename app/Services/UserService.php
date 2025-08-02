@@ -95,11 +95,21 @@ class UserService
         }
     }
 
-    //     // public function restoreUser($id): User
-    //     // {
-    //     //     // Khôi phục user đã bị xóa mềm
-    //     //     $user = User::withTrashed()->find($id); // Tìm cả bản ghi đã bị xóa mềm
-    //     //     return $user->restore();
-    //     // }
-    // }
+    /**
+     * Update the role/permission of a specific user.
+     *
+     * This method validates the incoming request to ensure the `role_id` is within the allowed set.
+     * Then it delegates the actual update logic to the User model.
+     *
+     * @param \Illuminate\Http\Request $request The HTTP request containing the new role ID.
+     * @param int $id The ID of the user whose permission is to be updated.
+     * @return void
+     */
+    public function changePermission($request, $id)
+    {
+        $data = $request->validate([
+            'role_id' => ['required', 'in:1,2,3,4']
+        ]);
+        User::changePermission($data, $id);
+    }
 }
